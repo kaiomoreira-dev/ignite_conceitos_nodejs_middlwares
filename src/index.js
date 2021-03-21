@@ -55,9 +55,8 @@ function checksTodoExists(request, response, next) {
     return response.status(400).json({error: 'Invalid uuidv4 user'});
   }
 
-  const checksTodoExistById = checkUserAccountByUsername.todos.find(todo => todo.id === id);
-  
-  console.log(checksTodoExistById);
+  const checksTodoExistById = checkUserAccountByUsername.todos.find(todo => 
+    todo.id === id);
 
   if(checksTodoExistById){
     return response.status(404).json({error: 'Id not found'});
@@ -149,8 +148,6 @@ app.post('/todos', checksExistsUserAccount, checksCreateTodosUserAvailability, (
 app.put('/todos/:id', checksTodoExists, (request, response) => {
   const { title, deadline } = request.body;
   const { todo } = request;
-
-  console.log(todo);
 
   todo.title = title;
   todo.deadline = new Date(deadline);
