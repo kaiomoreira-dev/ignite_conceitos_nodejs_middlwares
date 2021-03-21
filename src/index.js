@@ -51,13 +51,11 @@ function checksTodoExists(request, response, next) {
     return response.status(404).json({error: 'Invalid user'});
   }
 
-  const checkIdExistsByUuidv4 = validate(id);
-
-  if(!checkIdExistsByUuidv4){
+  if(!validate(id)){
     return response.status(400).json({error: 'Invalid uuidv4 user'});
   }
 
-  const checksTodoExistById = users.todos.find(todo => todo.id === id);
+  const checksTodoExistById = checkUserAccountByUsername.todos.find(todo => todo.id === id);
   
   console.log(checksTodoExistById);
 
