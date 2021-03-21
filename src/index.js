@@ -28,11 +28,8 @@ function checksCreateTodosUserAvailability(request, response, next) {
   const { user } = request;
 
   const todoLength = user.todos.length;
-
   console.log(todoLength);
-  console.log(user.pro);
-  
-  if(!(user.pro === false && todoLength <= 10 || user.pro === true)){
+  if(!(user.pro === false && todoLength <= 9 || user.pro === true)){
     return response.status(403).json({error: 'Amount todos exceed 10'});
   }
 
@@ -58,7 +55,7 @@ function checksTodoExists(request, response, next) {
   const checksTodoExistById = checkUserAccountByUsername.todos.find(todo => 
     todo.id === id);
 
-  if(checksTodoExistById){
+  if(!checksTodoExistById){
     return response.status(404).json({error: 'Id not found'});
   }
 
